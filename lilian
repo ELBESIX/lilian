@@ -1,0 +1,123 @@
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int solution(){
+    srand( time( NULL ) );
+
+    int i, j, k;
+    int solution[9][9];
+    printf("SOLUTION");  
+    printf("\n");  
+    printf("---------------------------------");  
+    printf("\n");  
+    for(j=0;j<9; ++j) 
+    {
+    for(i=0; i<9; ++i)
+        solution[j][i] = (i + j*3 +j /3) %9 +1 ; 
+    }
+    
+    for(i=0;i<9; ++i) 
+    {
+    for(j=0; j<9; ++j)
+        printf("%d ", solution[i][j]);
+    printf("\n");  
+    }
+    printf("---------------------------------");  
+    printf("\n");
+}
+
+int verifierLigneColonne(int grille[9][9], int ligne, int colonne, int v) {
+        for (int i = 0; i < 9; i++) {
+            if (grille[ligne][i] == v) {
+                return 0;
+            }
+        }
+        // Vérifier si le nombre est déjà présent dans la même colonne
+        for (int i = 0; i < 9; i++) {
+            if (grille[i][colonne] == v) {
+                return 0;
+            }
+        }
+    return 1;
+    }
+
+int verifierRegion(int grille[9][9], int ligne, int colonne, int v){
+         // Vérifier si le nombre est déjà présent dans la même région 3x3
+        int regionLigne = (ligne / 3) * 3;
+        int regionColonne = (colonne / 3) * 3;
+        for (int i = regionLigne; i < regionLigne + 3; i++) {
+            for (int j = regionColonne; j < regionColonne + 3; j++) {
+                if (grille[i][j] == v) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
+int verifierGrille(int grille[9][9], int ligne, int colonne){
+        if (ligne == 9) {
+            return 1;
+        }   
+        if (colonne == 9) {
+            return 1;
+        }
+        return 0;
+    }
+
+int main(){
+    int i, j, v;
+    int grille[9][9];
+    printf("Sudoku");  
+    printf("\n");  
+    printf("---------------------------------");  
+    printf("\n");  
+    for(j=0;j<9; ++j) 
+    {
+    for(i=0; i<9; ++i)
+        grille[j][i] = 0 ; 
+
+    }
+    grille[rand() % 9][rand() % 9] = 1 ;
+    grille[rand() % 9][rand() % 9] = 2 ;
+    grille[rand() % 9][rand() % 9] = 3 ;
+    grille[rand() % 9][rand() % 9] = 4 ;
+    grille[rand() % 9][rand() % 9] = 5 ;
+    grille[rand() % 9][rand() % 9] = 6 ;
+    grille[rand() % 9][rand() % 9] = 7 ;
+    grille[rand() % 9][rand() % 9] = 8 ;
+    grille[rand() % 9][rand() % 9] = 9 ;
+    for(i=0;i<9; ++i) 
+    {
+    for(j=0; j<9; ++j)
+        printf("%d ", grille[i][j]);
+    printf("\n");  
+    }
+
+    printf("---------------------------------");  
+    printf("\n");
+    {
+    printf("indice i : ");
+    scanf("%d", &i);
+    printf("indice j : ");
+    scanf("%d", &j);
+    printf("valeur : ");
+    scanf("%d", &v);
+    grille[i][j] = v;
+    }
+     
+    // if (verifierLigneColonne) {
+    //     return 1;
+    // if (verifierRegion)
+    //     return 1;
+    // if (verifierGrille) 
+    //     printf("grille resolue");
+    //     system("pause");
+    //     return 0;
+    // }
+    // printf("grille non resolue");
+    system("pause");
+    return 0;
+}
